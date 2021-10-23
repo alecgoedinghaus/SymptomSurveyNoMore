@@ -1,22 +1,51 @@
 import time
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 
 def click(driver, id = "NextButton"):
     button = driver.find_element_by_id(id)
     button.click()
 
 def main():
+    # Initialize webdriver
     driver = webdriver.Chrome('/Users/alecgoedinghaus/Downloads/chromedriver')
     url = "https://uclasurveys.co1.qualtrics.com/jfe/form/SV_3qRLtouCYKzBbH7?utm_source=BP06158+UCLA+COVID-19+Symptom+Monitoring+Survey+Reminder+Notification&utm_medium=email&utm_campaign=&utm_content=UCLA+COVID-19+Symptom+Monitoring+and+Vaccination+Verification+System+Survey"
     driver.get(url)
 
-    #First Screen
+    # Read MyUCLA info
+    with open('credentials.txt') as f:
+        lines = f.readlines()
+    
+    username = lines[0]
+    password = lines[1]
+
+    # First Screen
+    time.sleep(1)
     click(driver, "QID3-2-label")
     click(driver)
     time.sleep(1)
 
     # Log onto MyUCLA
-    time.sleep(60)
+    time.sleep(2)
+    text = driver.find_element_by_id("logon")
+    text.send_keys(username)
+
+    text = driver.find_element_by_id("pass")
+    text.send_keys(password)
+
+    text.send_keys(Keys.TAB)
+    text.send_keys(Keys.ENTER)
+
+    # time.sleep(3)
+    # button = driver.find_element_by_class_name("primary-button")
+    # # button = driver.find_element_by_name("_eventId_proceed")
+    # # button = driver.find_element("submit")
+    # # button = driver.find_element_by_name("primary-button")
+    # # button = driver.find_element("_eventId_proceed", by=By.NAME)
+    # button.click()
+    time.sleep(8)
+
 
     # Student Confirmation Page
     click(driver)
