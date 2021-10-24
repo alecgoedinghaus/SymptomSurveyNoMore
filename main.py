@@ -1,6 +1,6 @@
 import time
 from selenium import webdriver
-from selenium.webdriver.common.by import By
+# from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 def click(driver, id = "NextButton"):
@@ -39,13 +39,8 @@ def main():
 
     # time.sleep(3)
     # button = driver.find_element_by_class_name("primary-button")
-    # # button = driver.find_element_by_name("_eventId_proceed")
-    # # button = driver.find_element("submit")
-    # # button = driver.find_element_by_name("primary-button")
-    # # button = driver.find_element("_eventId_proceed", by=By.NAME)
     # button.click()
     time.sleep(8)
-
 
     # Student Confirmation Page
     click(driver)
@@ -85,7 +80,7 @@ def main():
     # Current Isolation Status
     click(driver, "QID12-2-label")
     click(driver)
-    time.sleep(1)
+    time.sleep(5)
 
     # Goodbye
     driver.quit()
