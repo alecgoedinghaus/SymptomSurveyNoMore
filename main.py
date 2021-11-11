@@ -27,7 +27,7 @@ def main():
     time.sleep(1)
 
     # Log onto MyUCLA
-    time.sleep(2)
+    time.sleep(3)
     text = driver.find_element_by_id("logon")
     text.send_keys(username)
 
@@ -40,7 +40,7 @@ def main():
     # time.sleep(3)
     # button = driver.find_element_by_class_name("primary-button")
     # button.click()
-    time.sleep(8)
+    time.sleep(15)
 
     # Student Confirmation Page
     click(driver)
