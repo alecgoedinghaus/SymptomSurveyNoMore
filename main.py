@@ -1,4 +1,5 @@
 import time
+import os
 from selenium import webdriver
 # from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -9,16 +10,12 @@ def click(driver, id = "NextButton"):
 
 def main():
     # Initialize webdriver
-    driver = webdriver.Chrome('/Users/alecgoedinghaus/Downloads/chromedriver')
+    driver = webdriver.Firefox()
     url = "https://uclasurveys.co1.qualtrics.com/jfe/form/SV_3qRLtouCYKzBbH7?utm_source=BP06158+UCLA+COVID-19+Symptom+Monitoring+Survey+Reminder+Notification&utm_medium=email&utm_campaign=&utm_content=UCLA+COVID-19+Symptom+Monitoring+and+Vaccination+Verification+System+Survey"
     driver.get(url)
-
-    # Read MyUCLA info
-    with open('credentials.txt') as f:
-        lines = f.readlines()
     
-    username = lines[0]
-    password = lines[1]
+    username = os.environ['UCLA_USER']
+    password = os.environ['UCLA_PASS']
 
     # First Screen
     time.sleep(1)
