@@ -4,8 +4,11 @@ This script will automatically fill out UCLA's daily Covid-19 symptom monitoring
 
 ## Prerequisites
 
-A ```credentials.txt``` must be provided in the root directory of the repo.
-The file should contain your MyUCLA username on the first line, and your MyUCLA password on the second line.
+Program expects a `.env` file with the following format:
+```
+UCLA_USER=
+UCLA_PASS=
+```
 
 Chromedriver is required for instantiating the selinium webdriver.
 Chromedriver can be downloaded [here](https://sites.google.com/chromium.org/driver/downloads).
@@ -19,12 +22,6 @@ After cloning the git repository, run the following commands:
 
 ```bash
 pip install pipenv
-```
-
-Program expects a `.env` file with the following format:
-```
-UCLA_USER=
-UCLA_PASS=
 ```
 
 Followed by:
