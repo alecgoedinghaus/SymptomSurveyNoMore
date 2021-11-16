@@ -21,6 +21,12 @@ After cloning the git repository, run the following commands:
 pip install pipenv
 ```
 
+Program expects a `.env` file with the following format:
+```
+UCLA_USER=
+UCLA_PASS=
+```
+
 Followed by:
 
 ```bash
