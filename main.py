@@ -14,7 +14,21 @@ def click(driver, id="NextButton"):
 
 def main():
     # Initialize webdriver
-    driver = webdriver.Firefox()
+    driver = None
+    try:
+        driver = webdriver.Chrome()
+    except:
+        print('no chrome driver found')
+    if not driver:
+        try:
+            driver = webdriver.Firefox()
+        except:
+            print('no firefox driver found')
+
+    if not driver:
+        print('no supported driver found')
+        return
+
     # straight to student survey
     url = "https://uclasurveys.co1.qualtrics.com/jfe/form/SV_2fy4RuUi5Izpreu"
     driver.get(url)
