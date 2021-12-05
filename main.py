@@ -7,9 +7,9 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 def click(driver, id="NextButton"):
-    button = WebDriverWait(driver, 3).until(
+    button = WebDriverWait(driver, 5).until(
         EC.element_to_be_clickable((By.ID, id)))
-    button.click()
+    button.click()  # I found this works better than ActionChain/scrolling solutions
 
 
 def main():
@@ -30,7 +30,7 @@ def main():
         return
 
     # straight to student survey
-    url = "https://uclasurveys.co1.qualtrics.com/jfe/form/SV_2fy4RuUi5Izpreu"
+    url = "https://uclasurveys.co1.qualtrics.com/jfe/form/SV_aeH9BFhYVjkYTsO"
     driver.get(url)
 
     username = os.environ['UCLA_USER']
@@ -49,35 +49,30 @@ def main():
     # wait for DUO to get verified
     WebDriverWait(driver, 30).until(EC.title_is('UCLA Symptom Monitoring'))
 
-    # Student Confirmation Page
+    # This is student form
     click(driver)
 
-    # Survey Information Page
+    # Your login information and clearance status
     click(driver)
 
-    # On Campus Expectations
-    click(driver, "QID221-15-label")
+    # Do you need to update your status? (you have indicated not completely remote)
+    click(driver, "QID215-2-label") # no
     click(driver)
 
-    # Login Information Confirmation
-    click(driver)
-
-    # Alt Email Page
-    click(driver)
-
-    # Vaccine Confirmation
+    # Do you need clearance
+    click(driver, "QID207-4-label") # yes
     click(driver)
 
     # 24hr Symptoms
     click(driver, "QID2-1-label")
     click(driver)
 
-    # Positive Covid Test
-    click(driver, "QID3-2-label")
-    click(driver)
-
     # Current Isolation Status
     click(driver, "QID12-2-label")
+    click(driver)
+
+    # Recent COVID test
+    click(driver, "QID3-2-label")
     click(driver)
 
     # Goodbye
