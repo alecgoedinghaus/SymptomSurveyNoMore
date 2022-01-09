@@ -1,4 +1,5 @@
 import os
+import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -70,12 +71,17 @@ def main():
     # Current Isolation Status
     click(driver, "QID12-2-label")
     click(driver)
+    
+    # At least one recent
+    click(driver, "QID192-1-label")
+    click(driver)
 
-    # Recent COVID test
+    # Recent negative COVID test
     click(driver, "QID3-2-label")
     click(driver)
 
     # Goodbye
+    time.sleep(3)
     driver.quit()
 
 
