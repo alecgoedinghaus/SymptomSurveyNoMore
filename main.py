@@ -57,11 +57,11 @@ def main():
     click(driver)
 
     # Do you need to update your status? (you have indicated not completely remote)
-    click(driver, "QID215-2-label") # no
+    click(driver, "QID215-2-label")  # no
     click(driver)
 
     # Do you need clearance
-    click(driver, "QID207-4-label") # yes
+    click(driver, "QID207-4-label")  # yes
     click(driver)
 
     # 24hr Symptoms
@@ -71,14 +71,18 @@ def main():
     # Current Isolation Status
     click(driver, "QID12-2-label")
     click(driver)
-    
-    # At least one recent
-    click(driver, "QID192-1-label")
+
+    # music and theater activities
+    click(driver, "QID289-2-label")
     click(driver)
 
+    # At least one recent
+    # click(driver, "QID192-1-label")
+    # click(driver)
+
     # Recent negative COVID test
-    click(driver, "QID3-2-label")
-    click(driver)
+    # click(driver, "QID3-2-label")
+    # click(driver)
 
     # Goodbye
     time.sleep(3)
