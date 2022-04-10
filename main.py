@@ -61,11 +61,11 @@ def main():
     click(driver)
 
     # Do you need to update your status? (you have indicated not completely remote)
-    click(driver, "QID215-2-label") # no
+    click(driver, "QID215-2-label")  # no
     click(driver)
 
     # Do you need clearance
-    click(driver, "QID207-4-label") # yes
+    click(driver, "QID207-4-label")  # yes
     click(driver)
 
     # 24hr Symptoms
