@@ -1,13 +1,17 @@
-import os
-import time
+from os import environ
+from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import ElementClickInterceptedException, TimeoutException
 
 
-def click(driver, id="NextButton"):
+def click(driver, id=None):
+    if id is None:
+        id = "NextButton"
+
     button = WebDriverWait(driver, 5).until(
         EC.element_to_be_clickable((By.ID, id)))
     button.click()  # I found this works better than ActionChain/scrolling solutions
@@ -34,8 +38,8 @@ def main():
     url = "https://uclasurveys.co1.qualtrics.com/jfe/form/SV_aeH9BFhYVjkYTsO"
     driver.get(url)
 
-    username = os.environ['UCLA_USER']
-    password = os.environ['UCLA_PASS']
+    username = environ['UCLA_USER']
+    password = environ['UCLA_PASS']
 
     text = WebDriverWait(driver, 5).until(
         EC.presence_of_element_located((By.ID, "logon")))
@@ -65,27 +69,33 @@ def main():
     click(driver)
 
     # 24hr Symptoms
-    click(driver, "QID2-1-label")
-    click(driver)
+    try:
+        click(driver, "QID2-1-label")
+        click(driver)
+    except ElementClickInterceptedException:    # Kind of hacky but should work
+        driver.quit()
+        main()
 
     # Current Isolation Status
     click(driver, "QID12-2-label")
     click(driver)
 
-    # music and theater activities
-    click(driver, "QID289-2-label")
-    click(driver)
-
-    # At least one recent
-    # click(driver, "QID192-1-label")
-    # click(driver)
+    # Music/theater testing requirements
+    # try:
+    #     click(driver, "QID289-2-label")
+    #     click(driver)
+    # except TimeoutException:
+    #     pass
 
     # Recent negative COVID test
-    # click(driver, "QID3-2-label")
-    # click(driver)
+    try:
+        click(driver, "QID293-1-label")
+        click(driver)
+    except TimeoutException:
+        pass
 
     # Goodbye
-    time.sleep(3)
+    sleep(1)
     driver.quit()
 
 
