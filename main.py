@@ -5,7 +5,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import ElementClickInterceptedException, TimeoutException
+from selenium.common.exceptions import ElementNotInteractableException, ElementClickInterceptedException, TimeoutException
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 def click(driver, id=None):
@@ -14,7 +15,16 @@ def click(driver, id=None):
 
     button = WebDriverWait(driver, 5).until(
         EC.element_to_be_clickable((By.ID, id)))
-    button.click()  # I found this works better than ActionChain/scrolling solutions
+    try:
+        button.click()  # I found this works better than ActionChain/scrolling solutions
+    except ElementNotInteractableException:
+        print("scroll error, attempting manual")
+        driver.implicitly_wait(3)
+        ActionChains(driver).move_to_element(button).perform()
+        # https://stackoverflow.com/questions/44777053/selenium-movetargetoutofboundsexception-with-firefox
+        button.click()
+    except:
+        print("other error")
 
 
 def main():
